@@ -1,0 +1,2237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A Question Worth Asking ❤️</title>
+    <!-- Google Fonts: Romantic & Readable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ---------- CSS Variables ---------- */
+        :root {
+            --blush: #f7c5cc;
+            --blush-light: #fce4e8;
+            --lavender: #d4c5f9;
+            --lavender-light: #ede6ff;
+            --pink: #e87a9e;
+            --pink-light: #f0b6c8;
+            --pink-glow: rgba(232, 122, 158, 0.35);
+            --white: #ffffff;
+            --white-soft: rgba(255, 255, 255, 0.92);
+            --glass-bg: rgba(255, 255, 255, 0.20);
+            --glass-border: rgba(255, 255, 255, 0.30);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.10);
+            --radius: 24px;
+            --transition: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --font-heading: 'Dancing Script', cursive;
+            --font-body: 'Nunito', 'Segoe UI', system-ui, sans-serif;
+        }
+
+        /* ---------- Reset & Base ---------- */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            min-height: 100vh;
+            background: linear-gradient(145deg, #fdf6f0 0%, #fce4e8 30%, #ede6ff 70%, #f7c5cc 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: relative;
+            font-weight: 400;
+            color: #3d1f3d;
+            width: 100%;
+        }
+
+        /* ---------- Background Particles (immediate start) ---------- */
+        #particles-container {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: floatUp linear infinite;
+            pointer-events: none;
+            will-change: transform, opacity;
+        }
+
+        .particle.heart {
+            font-size: 18px;
+            opacity: 0.35;
+            animation-duration: 12s;
+            color: #e74c7a;
+        }
+        .particle.star {
+            font-size: 14px;
+            opacity: 0.30;
+            animation-duration: 16s;
+            color: var(--pink-light);
+        }
+        .particle.glow {
+            width: 6px;
+            height: 6px;
+            background: rgba(232, 122, 158, 0.30);
+            border-radius: 50%;
+            box-shadow: 0 0 12px rgba(232, 122, 158, 0.25);
+            animation-duration: 20s;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) scale(0.6) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* ---------- Main App Container ---------- */
+        #app {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 720px;
+            min-width: 0;
+            margin: 0 auto;
+            min-height: 480px;
+            padding: 12px 0;
+            box-sizing: border-box;
+        }
+
+        /* ---------- Screens ---------- */
+        .screen {
+            display: none;
+            animation: fadeSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            padding: 8px 4px;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.96);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes pulseHeart {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.10);
+            }
+        }
+
+        @keyframes heartbeat {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            14% {
+                transform: scale(1.12);
+            }
+            28% {
+                transform: scale(1);
+            }
+            42% {
+                transform: scale(1.08);
+            }
+            56% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.6) rotate(-4deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0);
+            }
+        }
+
+        /* ---------- Typography ---------- */
+        .title-large {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            font-weight: 700;
+            color: #3d1f3d;
+            text-align: center;
+            line-height: 1.2;
+            margin-bottom: 4px;
+            text-shadow: 0 2px 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .title-large .heart-emoji {
+            display: inline-block;
+            animation: pulseHeart 1.6s ease-in-out infinite;
+        }
+
+        .subtitle {
+            font-family: var(--font-body);
+            font-size: 1.15rem;
+            font-weight: 300;
+            color: #5a3a5a;
+            text-align: center;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            opacity: 0.85;
+            text-shadow: 0 2px 12px rgba(255, 255, 255, 0.4);
+        }
+
+        .screen-title {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #3d1f3d;
+            text-align: center;
+            margin-bottom: 2px;
+            text-shadow: 0 2px 16px rgba(255, 255, 255, 0.5);
+        }
+
+        .screen-sub {
+            font-family: var(--font-body);
+            font-size: 1.05rem;
+            font-weight: 400;
+            color: #5a3a5a;
+            text-align: center;
+            margin-bottom: 18px;
+            opacity: 0.8;
+            text-shadow: 0 2px 12px rgba(255, 255, 255, 0.4);
+        }
+
+        /* ---------- Buttons ---------- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 60px;
+            font-family: var(--font-body);
+            font-size: clamp(0.85rem, 2.5vw, 1.1rem);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all var(--transition);
+            background: var(--white);
+            color: #4a2c4a;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+            min-width: 100px;
+            max-width: 100%;
+            touch-action: manipulation;
+            user-select: none;
+            white-space: nowrap;
+            box-sizing: border-box;
+            flex-shrink: 1;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #e87a9e, #d45a8a);
+            color: white;
+            box-shadow: 0 6px 28px rgba(212, 90, 138, 0.35);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 36px rgba(212, 90, 138, 0.45);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: #4a2c4a;
+        }
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.85);
+        }
+
+        .btn-romantic {
+            background: linear-gradient(135deg, #f0b6c8, #e87a9e);
+            color: white;
+            box-shadow: 0 6px 28px rgba(232, 122, 158, 0.35);
+            font-weight: 700;
+        }
+        .btn-romantic:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 36px rgba(232, 122, 158, 0.45);
+        }
+
+        .btn:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        .btn-heartbeat {
+            animation: heartbeat 1.2s ease-in-out infinite;
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #e87a9e, #d45a8a);
+            color: white;
+            font-family: var(--font-heading);
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            font-weight: 700;
+            padding: clamp(12px, 2vw, 18px) clamp(24px, 5vw, 48px);
+            box-shadow: 0 8px 36px rgba(212, 90, 138, 0.4);
+            white-space: nowrap;
+            max-width: 100%;
+        }
+        .btn-yes:hover {
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 14px 48px rgba(212, 90, 138, 0.5);
+        }
+
+        /* ---------- NO BUTTON - bulletproof responsive, never goes off screen ---------- */
+        .btn-no {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #5a3a5a;
+            font-family: var(--font-body);
+            font-size: clamp(0.75rem, 2.5vw, 1.1rem);
+            font-weight: 700;
+            padding: clamp(10px, 1.5vw, 14px) clamp(14px, 3vw, 36px);
+            transition: all 0.15s ease;
+            touch-action: none;
+            white-space: nowrap;
+            max-width: min(92vw, 280px);
+            min-width: auto;
+            width: auto;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            z-index: 10;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            line-height: 1.2;
+            box-sizing: border-box;
+            flex-shrink: 1;
+        }
+        .btn-no:hover {
+            background: rgba(255, 255, 255, 0.80);
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 16px;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0 8px;
+        }
+
+        /* ---------- Calendar (full visible) ---------- */
+        .calendar-wrapper {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: var(--radius);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            padding: 20px 16px 18px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+            margin: 6px 0 12px;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .calendar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 4px 12px;
+        }
+
+        .calendar-header .month-year {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #3d1f3d;
+        }
+
+        .calendar-header .nav-btn {
+            background: rgba(255, 255, 255, 0.5);
+            border: none;
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4a2c4a;
+        }
+        .calendar-header .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.85);
+            transform: scale(1.05);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+
+        .calendar-grid .day-name {
+            text-align: center;
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #6b4a6b;
+            opacity: 0.7;
+            padding: 4px 0;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .calendar-grid .day-cell {
+            text-align: center;
+            padding: 8px 0;
+            border-radius: 12px;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #4a2c4a;
+            cursor: pointer;
+            transition: all var(--transition);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid transparent;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .calendar-grid .day-cell:hover {
+            background: rgba(255, 255, 255, 0.45);
+            transform: scale(1.04);
+        }
+
+        .calendar-grid .day-cell.selected {
+            background: linear-gradient(135deg, #e87a9e, #d45a8a);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 16px rgba(212, 90, 138, 0.3);
+            transform: scale(1.05);
+        }
+
+        .calendar-grid .day-cell.other-month {
+            opacity: 0.3;
+            cursor: default;
+        }
+        .calendar-grid .day-cell.other-month:hover {
+            transform: none;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .calendar-grid .day-cell.today {
+            border-color: var(--pink);
+            border-width: 2px;
+        }
+
+        .calendar-grid .day-cell:not(.other-month):not(.selected):hover {
+            background: rgba(255, 255, 255, 0.40);
+        }
+
+        .calendar-day-display {
+            text-align: center;
+            margin-top: 10px;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            color: #5a3a5a;
+            opacity: 0.75;
+            font-weight: 500;
+        }
+
+        .calendar-day-display strong {
+            color: #3d1f3d;
+            font-weight: 700;
+        }
+
+        /* ---------- Time Cards ---------- */
+        .time-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 14px;
+            margin: 8px 0 12px;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .time-card {
+            background: rgba(255, 255, 255, 0.40);
+            backdrop-filter: blur(8px);
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            border-radius: 18px;
+            padding: 20px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition);
+            user-select: none;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        }
+
+        .time-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.60);
+        }
+
+        .time-card.selected {
+            border-color: var(--pink);
+            background: rgba(255, 255, 255, 0.75);
+            box-shadow: 0 4px 24px var(--pink-glow);
+            transform: translateY(-4px);
+        }
+
+        .time-card .emoji {
+            font-size: 2.4rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .time-card .label {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            color: #3d1f3d;
+            font-size: 1.2rem;
+        }
+        .time-card .sub-label {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            color: #5a3a5a;
+            opacity: 0.7;
+            font-weight: 600;
+        }
+
+        /* ---------- Food Grid ---------- */
+        .food-section-label {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: #5a3a5a;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin: 14px 0 6px;
+            opacity: 0.7;
+            text-align: center;
+        }
+
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 4px 0 8px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .food-item {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(4px);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            padding: 12px 6px;
+            text-align: center;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #3d1f3d;
+            cursor: pointer;
+            transition: all var(--transition);
+            user-select: none;
+            line-height: 1.3;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        .food-item:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.60);
+        }
+
+        .food-item.selected {
+            border-color: var(--pink);
+            background: rgba(255, 255, 255, 0.80);
+            box-shadow: 0 4px 20px var(--pink-glow);
+            transform: translateY(-3px);
+        }
+
+        .food-item .food-emoji {
+            display: block;
+            font-size: 1.8rem;
+            margin-bottom: 2px;
+        }
+
+        .food-counter {
+            text-align: center;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            color: #5a3a5a;
+            margin: 8px 0 2px;
+            opacity: 0.8;
+            font-weight: 600;
+        }
+
+        .food-counter strong {
+            color: #3d1f3d;
+            font-weight: 800;
+        }
+
+        /* ---------- Food "Let's Go" button - hidden until 3 selected ---------- */
+        #btn-lets-go-wrapper {
+            text-align: center;
+            margin-top: 12px;
+            min-height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #btn-lets-go {
+            display: none;
+            animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        #btn-lets-go.show {
+            display: inline-flex;
+        }
+
+        /* ---------- Final Page ---------- */
+        .final-hero {
+            text-align: center;
+            padding: 4px 0 2px;
+        }
+
+        .final-hero .big-heart {
+            font-size: 3.8rem;
+            display: inline-block;
+            animation: pulseHeart 1.6s ease-in-out infinite;
+        }
+
+        .final-hero h1 {
+            font-family: var(--font-heading);
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: #3d1f3d;
+            margin-bottom: 0px;
+            text-shadow: 0 2px 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .final-hero p {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            color: #5a3a5a;
+            opacity: 0.8;
+            text-shadow: 0 2px 12px rgba(255, 255, 255, 0.4);
+            font-weight: 400;
+        }
+
+        /* Celebration banner on final page */
+        .celebration-banner {
+            text-align: center;
+            padding: 12px 0 6px;
+            animation: popIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        .celebration-banner .celebration-icon {
+            font-size: 4rem;
+            display: block;
+            animation: pulseHeart 1.4s ease-in-out infinite;
+        }
+        .celebration-banner h2 {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #3d1f3d;
+            text-shadow: 0 2px 20px rgba(255, 255, 255, 0.5);
+        }
+        .celebration-banner p {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            color: #5a3a5a;
+            opacity: 0.8;
+            font-weight: 400;
+        }
+
+        .details-card {
+            background: rgba(255, 255, 255, 0.30);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 18px 22px;
+            margin: 14px 0;
+            border: 1px solid rgba(255, 255, 255, 0.30);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        .details-card .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.20);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .details-card .row:last-child {
+            border-bottom: none;
+        }
+
+        .details-card .row .label {
+            color: #5a3a5a;
+            opacity: 0.7;
+            font-weight: 600;
+        }
+        .details-card .row .value {
+            color: #3d1f3d;
+            font-weight: 700;
+            text-align: right;
+            max-width: 60%;
+        }
+
+        .quote-card {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
+            padding: 22px 26px;
+            margin: 12px 0;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.20);
+            font-family: var(--font-heading);
+            font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+            font-weight: 600;
+            line-height: 1.6;
+            color: #3d1f3d;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+        }
+
+        .quote-card .quote-mark {
+            font-size: 2.2rem;
+            color: var(--pink);
+            opacity: 0.5;
+            margin-right: 4px;
+        }
+
+        /* ---------- Final buttons ---------- */
+        .final-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-top: 8px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .final-actions .btn-romantic {
+            min-width: min(200px, 80vw);
+            max-width: 100%;
+            font-size: clamp(0.85rem, 2.5vw, 1rem);
+            padding: clamp(10px, 1.5vw, 12px) clamp(20px, 4vw, 28px);
+            font-weight: 700;
+            text-decoration: none;
+            box-sizing: border-box;
+            white-space: nowrap;
+        }
+
+        .final-actions .btn-romantic:hover {
+            transform: translateY(-3px) scale(1.02);
+        }
+
+        .final-actions .start-over-link {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            color: #5a3a5a;
+            opacity: 0.5;
+            cursor: pointer;
+            transition: opacity var(--transition);
+            background: none;
+            border: none;
+            text-decoration: underline;
+            font-weight: 400;
+        }
+        .final-actions .start-over-link:hover {
+            opacity: 0.9;
+        }
+
+        /* ---------- No Button Popup ---------- */
+        #no-popup {
+            position: fixed;
+            inset: 0;
+            z-index: 90;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.20);
+            backdrop-filter: blur(6px);
+            padding: 20px;
+        }
+
+        #no-popup.active {
+            display: flex;
+        }
+
+        .no-popup-content {
+            background: rgba(255, 255, 255, 0.90);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius);
+            padding: 32px 28px;
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+            animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        .no-popup-content h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #3d1f3d;
+            margin-bottom: 6px;
+        }
+        .no-popup-content p {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: #5a3a5a;
+            margin-bottom: 18px;
+            opacity: 0.8;
+            font-weight: 400;
+        }
+
+        .no-popup-content .btn {
+            font-family: var(--font-body);
+            font-weight: 700;
+        }
+
+        /* ---------- Wheel Spinner ---------- */
+        .wheel-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 12px 0;
+        }
+
+        .wheel {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 4px solid var(--pink);
+            background: conic-gradient(#f7c5cc 0% 50%, #d4c5f9 50% 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #4a2c4a;
+            transition: transform 3s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+            box-shadow: 0 4px 24px var(--pink-glow);
+            position: relative;
+        }
+
+        .wheel.spinning {
+            transform: rotate(1440deg);
+        }
+
+        .wheel .wheel-center {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .wheel-pointer {
+            width: 0;
+            height: 0;
+            border-left: 14px solid transparent;
+            border-right: 14px solid transparent;
+            border-top: 24px solid var(--pink);
+            margin-top: -6px;
+            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.12));
+        }
+
+        /* ---------- Confetti Canvas ---------- */
+        #confetti-canvas {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            pointer-events: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 540px) {
+            #app {
+                padding: 6px 0;
+            }
+            .screen {
+                padding: 4px 2px;
+            }
+            .title-large {
+                font-size: 2.2rem;
+            }
+            .screen-title {
+                font-size: 1.8rem;
+            }
+            .btn {
+                font-size: clamp(0.82rem, 3vw, 0.95rem);
+                padding: clamp(10px, 2vw, 12px) clamp(16px, 4vw, 24px);
+                min-width: 80px;
+            }
+            .btn-yes {
+                font-size: clamp(1.2rem, 5vw, 1.5rem);
+                padding: clamp(12px, 2.5vw, 16px) clamp(20px, 5vw, 32px);
+            }
+            .btn-no {
+                font-size: clamp(0.78rem, 2.8vw, 0.9rem);
+                padding: clamp(10px, 1.8vw, 12px) clamp(12px, 3vw, 20px);
+                max-width: min(85vw, 200px);
+            }
+            .btn-group {
+                gap: 10px;
+                padding: 0 4px;
+            }
+            .time-grid {
+                grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+                gap: 10px;
+            }
+            .time-card {
+                padding: 14px 8px;
+            }
+            .time-card .emoji {
+                font-size: 1.8rem;
+            }
+            .time-card .label {
+                font-size: 1rem;
+            }
+            .food-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+            .food-item {
+                font-size: 0.75rem;
+                padding: 10px 4px;
+            }
+            .food-item .food-emoji {
+                font-size: 1.4rem;
+            }
+            .final-hero h1 {
+                font-size: 2.6rem;
+            }
+            .celebration-banner h2 {
+                font-size: 2.2rem;
+            }
+            .celebration-banner .celebration-icon {
+                font-size: 3.2rem;
+            }
+            .details-card .row {
+                font-size: 0.85rem;
+                flex-wrap: wrap;
+                gap: 4px;
+            }
+            .details-card .row .value {
+                max-width: 100%;
+                text-align: left;
+                width: 100%;
+            }
+            .calendar-wrapper {
+                padding: 14px 10px;
+            }
+            .calendar-grid .day-cell {
+                padding: 6px 0;
+                font-size: 0.8rem;
+                min-height: 34px;
+            }
+            .calendar-header .month-year {
+                font-size: 1.2rem;
+            }
+            .no-popup-content {
+                padding: 24px 18px;
+            }
+            .no-popup-content h3 {
+                font-size: 1.5rem;
+            }
+            .quote-card {
+                font-size: clamp(1.1rem, 4vw, 1.4rem);
+                padding: 16px 18px;
+            }
+            .final-actions .btn-romantic {
+                min-width: min(160px, 75vw);
+                font-size: clamp(0.82rem, 3vw, 0.9rem);
+            }
+            .subtitle {
+                font-size: 0.95rem;
+                letter-spacing: 1px;
+            }
+            .screen-sub {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .title-large {
+                font-size: 1.8rem;
+            }
+            .screen-title {
+                font-size: 1.5rem;
+            }
+            .food-grid {
+                gap: 6px;
+            }
+            .food-item {
+                font-size: 0.7rem;
+                padding: 8px 3px;
+                border-radius: 10px;
+            }
+            .food-item .food-emoji {
+                font-size: 1.2rem;
+            }
+            .time-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 6px;
+            }
+            .time-card {
+                padding: 10px 4px;
+            }
+            .time-card .emoji {
+                font-size: 1.4rem;
+            }
+            .time-card .label {
+                font-size: 0.85rem;
+            }
+            .calendar-grid .day-cell {
+                padding: 4px 0;
+                font-size: 0.7rem;
+                min-height: 28px;
+                border-radius: 8px;
+            }
+            .calendar-wrapper {
+                padding: 10px 6px;
+            }
+            .details-card {
+                padding: 12px 14px;
+            }
+            .celebration-banner h2 {
+                font-size: 1.8rem;
+            }
+            .celebration-banner .celebration-icon {
+                font-size: 2.8rem;
+            }
+            .final-hero h1 {
+                font-size: 2.2rem;
+            }
+            .quote-card {
+                font-size: clamp(1rem, 4.5vw, 1.3rem);
+                padding: 14px 14px;
+            }
+            .btn-no {
+                font-size: clamp(0.7rem, 2.8vw, 0.82rem);
+                padding: 9px 12px;
+                max-width: min(80vw, 180px);
+            }
+            .btn-yes {
+                font-size: clamp(1rem, 5vw, 1.3rem);
+                padding: 12px 20px;
+            }
+            .btn-group {
+                gap: 8px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .btn-yes {
+                font-size: clamp(0.9rem, 5vw, 1.2rem);
+                padding: 11px 18px;
+            }
+            .btn-no {
+                font-size: clamp(0.65rem, 3vw, 0.75rem);
+                padding: 8px 10px;
+                min-width: 60px;
+                max-width: min(75vw, 160px);
+            }
+            .title-large {
+                font-size: 1.5rem;
+            }
+            .screen-title {
+                font-size: 1.3rem;
+            }
+            .btn-group {
+                gap: 8px;
+                padding: 0 2px;
+            }
+            .quote-card {
+                font-size: clamp(0.95rem, 4.5vw, 1.15rem);
+            }
+        }
+
+        /* ---------- Utilities ---------- */
+        .mt-8 {
+            margin-top: 8px;
+        }
+        .mt-12 {
+            margin-top: 12px;
+        }
+        .mt-16 {
+            margin-top: 16px;
+        }
+        .mt-20 {
+            margin-top: 20px;
+        }
+        .mb-8 {
+            margin-bottom: 8px;
+        }
+        .mb-12 {
+            margin-bottom: 12px;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .w-full {
+            width: 100%;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* ---------- Scrollbar ---------- */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--blush);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--pink);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ====== BACKGROUND PARTICLES ====== -->
+    <div id="particles-container"></div>
+
+    <!-- ====== CONFETTI CANVAS ====== -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- ====== NO POPUP ====== -->
+    <div id="no-popup">
+        <div class="no-popup-content">
+            <h3>Negotiations Are Still Open 😌</h3>
+            <p>You've got options... choose wisely.</p>
+            <div class="btn-group">
+                <button class="btn btn-primary" id="no-fine-yes">Fine... Yes ❤️</button>
+                <button class="btn btn-secondary" id="no-maybe">Maybe 😏</button>
+            </div>
+            <div id="wheel-area" class="wheel-container hidden">
+                <div class="wheel-pointer"></div>
+                <div class="wheel" id="wheel-spinner">
+                    <div class="wheel-center">❤️</div>
+                </div>
+                <p style="margin-top:10px;font-family:'Nunito',sans-serif;font-size:0.85rem;color:#5a3a5a;opacity:0.7;font-weight:600;">Spinning...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== APP ====== -->
+    <div id="app">
+
+        <!-- ===== SCREEN 1 ===== -->
+        <div id="screen1" class="screen active">
+            <div style="text-align:center;padding:20px 0 10px;">
+                <div style="font-size:4rem;margin-bottom:6px;animation:pulseHeart 1.6s ease-in-out infinite;">❤️</div>
+                <h1 class="title-large">
+                    Will You Go On A Date With Me? <span class="heart-emoji">❤️</span>
+                </h1>
+                <p class="subtitle">A Question Worth Asking</p>
+                <div class="btn-group" style="margin-top:28px;">
+                    <button class="btn btn-yes" id="btn-yes">YES ❤️</button>
+                    <button class="btn btn-no" id="btn-no">NO 😏</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SCREEN 2 ===== -->
+        <div id="screen2" class="screen">
+            <div style="text-align:center;">
+                <h2 class="screen-title">When Should Our Adventure Begin? 📅</h2>
+                <p class="screen-sub">Pick a date that works for you</p>
+                <div class="calendar-wrapper" id="calendar-wrapper">
+                    <div class="calendar-header">
+                        <button class="nav-btn" id="cal-prev">‹</button>
+                        <span class="month-year" id="cal-month-year">January 2026</span>
+                        <button class="nav-btn" id="cal-next">›</button>
+                    </div>
+                    <div class="calendar-grid" id="calendar-grid">
+                        <!-- day names + cells rendered by JS -->
+                    </div>
+                    <div class="calendar-day-display" id="cal-day-display">✨ Select a date above</div>
+                </div>
+                <button class="btn btn-primary mt-12" id="btn-continue-time" disabled>Continue →</button>
+            </div>
+        </div>
+
+        <!-- ===== SCREEN 3 ===== -->
+        <div id="screen3" class="screen">
+            <div style="text-align:center;">
+                <h2 class="screen-title">Choose The Perfect Time ⏰</h2>
+                <p class="screen-sub">When should our adventure begin?</p>
+                <div class="time-grid" id="time-grid">
+                    <div class="time-card" data-time="morning" data-label="8:00 AM">
+                        <span class="emoji">🌅</span>
+                        <div class="label">Morning</div>
+                        <div class="sub-label">8:00 AM</div>
+                    </div>
+                    <div class="time-card" data-time="afternoon" data-label="2:00 PM">
+                        <span class="emoji">☀️</span>
+                        <div class="label">Afternoon</div>
+                        <div class="sub-label">2:00 PM</div>
+                    </div>
+                    <div class="time-card" data-time="night" data-label="9:00 PM">
+                        <span class="emoji">🌙</span>
+                        <div class="label">Night</div>
+                        <div class="sub-label">9:00 PM</div>
+                    </div>
+                </div>
+                <button class="btn btn-primary mt-12" id="btn-continue-food" disabled>Continue →</button>
+            </div>
+        </div>
+
+        <!-- ===== SCREEN 4 ===== -->
+        <div id="screen4" class="screen">
+            <div style="text-align:center;">
+                <h2 class="screen-title">Pick Your Favorites 🍽️</h2>
+                <p class="screen-sub" id="food-time-label">Select exactly 3 items</p>
+                <div id="food-container"></div>
+                <div class="food-counter" id="food-counter">Selected: <strong id="food-count">0</strong> / 3</div>
+                <div id="btn-lets-go-wrapper">
+                    <button class="btn btn-romantic btn-heartbeat" id="btn-lets-go">Let's Go ❤️</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SCREEN 5 (FINAL) ===== -->
+        <div id="screen5" class="screen">
+            <!-- Celebration banner -->
+            <div class="celebration-banner" id="celebration-banner">
+                <span class="celebration-icon">🎉</span>
+                <h2>Yay! It's A Date ❤️</h2>
+                <p>Something Wonderful Awaits</p>
+            </div>
+
+            <div class="details-card" id="final-details">
+                <div class="row"><span class="label">📅 Date</span><span class="value" id="final-date">—</span></div>
+                <div class="row"><span class="label">📆 Day</span><span class="value" id="final-day">—</span></div>
+                <div class="row"><span class="label">⏰ Time</span><span class="value" id="final-time">—</span></div>
+                <div class="row"><span class="label">🍽 Selected Foods</span><span class="value" id="final-foods">—</span></div>
+            </div>
+
+            <div class="quote-card" id="final-quote">
+                <span class="quote-mark">"</span><span id="quote-text">Every beautiful day begins with a reason to smile.</span><span class="quote-mark">"</span>
+            </div>
+
+            <div class="final-actions">
+                <a class="btn btn-romantic" id="btn-add-calendar" target="_blank" rel="noopener">Add To Calendar 📅</a>
+                <button class="start-over-link" id="btn-restart">Start Over</button>
+            </div>
+            <p style="text-align:center;font-family:'Nunito',sans-serif;font-size:0.65rem;color:#5a3a5a;opacity:0.25;margin-top:10px;font-weight:400;">Made with ❤️ — A Question Worth Asking</p>
+        </div>
+
+    </div><!-- /app -->
+
+    <script>
+        // ============================================================
+        //  STATE
+        // ============================================================
+        const state = {
+            currentScreen: 'screen1',
+            selectedDate: null,
+            selectedTime: null,
+            selectedFoods: [],
+            noClickCount: 0,
+            noSequence: [
+                'No 😏',
+                'Are You Sure? 🤔',
+                'Really Sure? 🥺',
+                'Think Again ❤️',
+                'Come On 😭',
+                'You Might Regret This 😅',
+                'Last Chance 👀'
+            ],
+            isNoMoving: false,
+            hasCelebrated: false,
+            confettiFired: false,
+            calendarMonth: 0,
+            calendarYear: 0,
+            calendarSelectedDate: null,
+            // Store the original NO button text for reset
+            noOriginalText: 'NO 😏',
+        };
+
+        // ============================================================
+        //  DOM REFS
+        // ============================================================
+        const $ = id => document.getElementById(id);
+        const qs = (sel, ctx = document) => ctx.querySelector(sel);
+        const qsa = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+
+        const screens = {
+            s1: $('screen1'),
+            s2: $('screen2'),
+            s3: $('screen3'),
+            s4: $('screen4'),
+            s5: $('screen5'),
+        };
+
+        // ============================================================
+        //  HELPERS
+        // ============================================================
+        function showScreen(id) {
+            Object.values(screens).forEach(el => el.classList.remove('active'));
+            const target = screens[id];
+            if (target) {
+                target.classList.add('active');
+                target.style.animation = 'none';
+                requestAnimationFrame(() => {
+                    target.style.animation = '';
+                });
+            }
+            state.currentScreen = id;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function getDayName(dateStr) {
+            if (!dateStr) return '—';
+            const d = new Date(dateStr + 'T00:00:00');
+            return d.toLocaleDateString('en-US', { weekday: 'long' });
+        }
+
+        function formatDateDisplay(dateStr) {
+            if (!dateStr) return '—';
+            const d = new Date(dateStr + 'T00:00:00');
+            return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        }
+
+        function formatTimeLabel(timeKey) {
+            const map = { morning: '8:00 AM', afternoon: '2:00 PM', night: '9:00 PM' };
+            return map[timeKey] || '—';
+        }
+
+        function formatTimeEmoji(timeKey) {
+            const map = { morning: '🌅', afternoon: '☀️', night: '🌙' };
+            return map[timeKey] || '';
+        }
+
+        function getQuote(timeKey) {
+            const quotes = {
+                morning: [
+                    'Every beautiful day begins with a reason to smile.',
+                    'Can\'t wait to start this day with you.'
+                ],
+                afternoon: [
+                    'The best afternoons are spent creating memories together.',
+                    'Good food and great company make the perfect combination.'
+                ],
+                night: [
+                    'Some nights become memories before they even begin.',
+                    'The stars shine brighter when shared with someone special.'
+                ]
+            };
+            const list = quotes[timeKey] || quotes.morning;
+            return list[Math.floor(Math.random() * list.length)];
+        }
+
+        // ============================================================
+        //  CALENDAR
+        // ============================================================
+        let calViewDate = new Date();
+
+        function renderCalendar() {
+            const year = calViewDate.getFullYear();
+            const month = calViewDate.getMonth();
+
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const daysInMonth = lastDay.getDate();
+            const startDayOfWeek = firstDay.getDay();
+
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+            $('cal-month-year').textContent = `${monthNames[month]} ${year}`;
+
+            const grid = $('calendar-grid');
+            grid.innerHTML = '';
+            const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            dayNames.forEach(name => {
+                const el = document.createElement('div');
+                el.className = 'day-name';
+                el.textContent = name;
+                grid.appendChild(el);
+            });
+
+            const today = new Date();
+            const todayStr =
+                `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+
+            const prevMonthLastDay = new Date(year, month, 0).getDate();
+            const startOffset = startDayOfWeek === 0 ? 6 : startDayOfWeek - 1;
+
+            const totalCells = Math.ceil((startOffset + daysInMonth) / 7) * 7;
+
+            for (let i = 0; i < totalCells; i++) {
+                let dayNum;
+                let isOtherMonth = false;
+                let dateObj;
+
+                if (i < startOffset) {
+                    const prevMonthDay = prevMonthLastDay - startOffset + i + 1;
+                    dayNum = prevMonthDay;
+                    isOtherMonth = true;
+                    dateObj = new Date(year, month - 1, prevMonthDay);
+                } else if (i >= startOffset + daysInMonth) {
+                    const nextMonthDay = i - (startOffset + daysInMonth) + 1;
+                    dayNum = nextMonthDay;
+                    isOtherMonth = true;
+                    dateObj = new Date(year, month + 1, nextMonthDay);
+                } else {
+                    dayNum = i - startOffset + 1;
+                    dateObj = new Date(year, month, dayNum);
+                }
+
+                const el = document.createElement('div');
+                el.className = 'day-cell';
+                if (isOtherMonth) el.classList.add('other-month');
+                el.textContent = dayNum;
+
+                const dateStr =
+                    `${dateObj.getFullYear()}-${String(dateObj.getMonth()+1).padStart(2,'0')}-${String(dateObj.getDate()).padStart(2,'0')}`;
+
+                if (dateStr === todayStr && !isOtherMonth) {
+                    el.classList.add('today');
+                }
+
+                if (state.calendarSelectedDate && dateStr === state.calendarSelectedDate) {
+                    el.classList.add('selected');
+                }
+
+                if (!isOtherMonth) {
+                    el.addEventListener('click', () => {
+                        qsa('.day-cell.selected').forEach(c => c.classList.remove('selected'));
+                        el.classList.add('selected');
+                        const selectedStr = dateStr;
+                        state.calendarSelectedDate = selectedStr;
+                        state.selectedDate = selectedStr;
+                        $('cal-day-display').innerHTML =
+                            `📆 <strong>${getDayName(selectedStr)}</strong> · ${formatDateDisplay(selectedStr)}`;
+                        $('btn-continue-time').disabled = false;
+                    });
+                } else {
+                    el.style.cursor = 'default';
+                }
+
+                grid.appendChild(el);
+            }
+        }
+
+        // ============================================================
+        //  FOOD DATA
+        // ============================================================
+        const foodData = {
+            morning: {
+                label: 'Morning Menu 🌅',
+                sections: [
+                    { name: 'Main', items: ['Pancakes', 'French Toast', 'Omelette', 'Croissant', 'Waffles',
+                            'Breakfast Sandwich'
+                        ] },
+                    { name: 'Desserts', items: ['Cinnamon Roll', 'Blueberry Muffin', 'Donut', 'Chocolate Danish',
+                            'Fruit Tart', 'Banana Bread'
+                        ] },
+                    { name: 'Drinks', items: ['Cappuccino', 'Latte', 'Fresh Orange Juice', 'Hot Chocolate',
+                            'Green Tea', 'Smoothie'
+                        ] }
+                ]
+            },
+            afternoon: {
+                label: 'Afternoon Menu ☀️',
+                sections: [
+                    { name: 'Main', items: ['Burger', 'Pizza Slice', 'Pasta', 'Chicken Wrap', 'Club Sandwich',
+                            'Grilled Chicken'
+                        ] },
+                    { name: 'Desserts', items: ['Brownie', 'Cheesecake', 'Ice Cream', 'Tiramisu', 'Fruit Salad',
+                            'Pudding'
+                        ] },
+                    { name: 'Drinks', items: ['Iced Coffee', 'Lemonade', 'Milkshake', 'Mocktail', 'Sparkling Water',
+                            'Fresh Juice'
+                        ] }
+                ]
+            },
+            night: {
+                label: 'Night Menu 🌙',
+                sections: [
+                    { name: 'Main', items: ['Steak', 'Alfredo Pasta', 'Sushi', 'BBQ Platter', 'Grilled Salmon',
+                            'Premium Burger'
+                        ] },
+                    { name: 'Desserts', items: ['Chocolate Lava Cake', 'Red Velvet Cake', 'Cheesecake',
+                            'Ice Cream Sundae', 'Crème Brûlée', 'Fruit Tart'
+                        ] },
+                    { name: 'Drinks', items: ['Sparkling Drink', 'Mocktail', 'Coffee', 'Fresh Juice', 'Herbal Tea',
+                            'Milkshake'
+                        ] }
+                ]
+            }
+        };
+
+        // ============================================================
+        //  RENDER FOODS
+        // ============================================================
+        function renderFoods(timeKey) {
+            const container = $('food-container');
+            const data = foodData[timeKey];
+            if (!data) { container.innerHTML = '<p style="color:#5a3a5a;">Please select a time first.</p>'; return; }
+
+            $('food-time-label').textContent = `Select exactly 3 items from ${data.label}`;
+            state.selectedFoods = [];
+
+            let html = '';
+            data.sections.forEach(section => {
+                html += `<div class="food-section-label">${section.name}</div>`;
+                html += `<div class="food-grid">`;
+                section.items.forEach(item => {
+                    const emoji = getFoodEmoji(item);
+                    html += `
+                        <div class="food-item" data-food="${item}">
+                            <span class="food-emoji">${emoji}</span>
+                            ${item}
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+            });
+
+            container.innerHTML = html;
+            updateFoodCounter();
+
+            qsa('.food-item', container).forEach(el => {
+                el.addEventListener('click', () => {
+                    const name = el.dataset.food;
+                    toggleFoodSelection(name, el);
+                });
+            });
+
+            $('btn-lets-go').classList.remove('show');
+        }
+
+        function getFoodEmoji(food) {
+            const map = {
+                'Pancakes': '🥞',
+                'French Toast': '🍞',
+                'Omelette': '🍳',
+                'Croissant': '🥐',
+                'Waffles': '🧇',
+                'Breakfast Sandwich': '🥪',
+                'Cinnamon Roll': '🍥',
+                'Blueberry Muffin': '🧁',
+                'Donut': '🍩',
+                'Chocolate Danish': '🥐',
+                'Fruit Tart': '🍓',
+                'Banana Bread': '🍌',
+                'Cappuccino': '☕',
+                'Latte': '☕',
+                'Fresh Orange Juice': '🍊',
+                'Hot Chocolate': '☕',
+                'Green Tea': '🍵',
+                'Smoothie': '🥤',
+                'Burger': '🍔',
+                'Pizza Slice': '🍕',
+                'Pasta': '🍝',
+                'Chicken Wrap': '🌯',
+                'Club Sandwich': '🥪',
+                'Grilled Chicken': '🍗',
+                'Brownie': '🍫',
+                'Cheesecake': '🍰',
+                'Ice Cream': '🍦',
+                'Tiramisu': '🍰',
+                'Fruit Salad': '🥗',
+                'Pudding': '🍮',
+                'Iced Coffee': '🧊',
+                'Lemonade': '🍋',
+                'Milkshake': '🥤',
+                'Mocktail': '🍹',
+                'Sparkling Water': '💧',
+                'Fresh Juice': '🧃',
+                'Steak': '🥩',
+                'Alfredo Pasta': '🍝',
+                'Sushi': '🍣',
+                'BBQ Platter': '🍖',
+                'Grilled Salmon': '🐟',
+                'Premium Burger': '🍔',
+                'Chocolate Lava Cake': '🍫',
+                'Red Velvet Cake': '🍰',
+                'Ice Cream Sundae': '🍦',
+                'Crème Brûlée': '🍮',
+                'Sparkling Drink': '🥂',
+                'Coffee': '☕',
+                'Herbal Tea': '🌿',
+            };
+            return map[food] || '🍽️';
+        }
+
+        function toggleFoodSelection(name, el) {
+            const idx = state.selectedFoods.indexOf(name);
+            if (idx > -1) {
+                state.selectedFoods.splice(idx, 1);
+                el.classList.remove('selected');
+            } else {
+                if (state.selectedFoods.length >= 3) {
+                    el.style.animation = 'none';
+                    requestAnimationFrame(() => {
+                        el.style.animation = 'shake 0.3s ease';
+                    });
+                    return;
+                }
+                state.selectedFoods.push(name);
+                el.classList.add('selected');
+            }
+            updateFoodCounter();
+        }
+
+        function updateFoodCounter() {
+            const count = state.selectedFoods.length;
+            $('food-count').textContent = count;
+            const btn = $('btn-lets-go');
+            if (count === 3) {
+                btn.classList.add('show');
+                btn.classList.add('btn-heartbeat');
+                btn.disabled = false;
+            } else {
+                btn.classList.remove('show');
+                btn.classList.remove('btn-heartbeat');
+                btn.disabled = true;
+            }
+        }
+
+        // inject shake
+        (function injectShake() {
+            if (!document.getElementById('shake-style')) {
+                const style = document.createElement('style');
+                style.id = 'shake-style';
+                style.textContent = `
+                    @keyframes shake {
+                        0%,100% { transform: translateX(0); }
+                        25% { transform: translateX(-6px); }
+                        75% { transform: translateX(6px); }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        })();
+
+        // ============================================================
+        //  NO BUTTON LOGIC - FIXED: stays in view, text never squished
+        // ============================================================
+        function handleNoClick() {
+            const btn = $('btn-no');
+            if (state.isNoMoving) return;
+            state.isNoMoving = true;
+
+            // Get current button dimensions
+            const rect = btn.getBoundingClientRect();
+            const btnW = rect.width;
+            const btnH = rect.height;
+
+            // Get viewport dimensions with safe padding
+            const padding = 16;
+            const vw = window.innerWidth;
+            const vh = window.innerHeight;
+
+            // Calculate max position (ensuring button stays fully visible)
+            const maxX = Math.max(padding, vw - btnW - padding);
+            const maxY = Math.max(padding, vh - btnH - padding);
+
+            // Random position within bounds
+            const x = Math.min(maxX, Math.max(padding, Math.random() * maxX));
+            const y = Math.min(maxY, Math.max(padding, Math.random() * maxY));
+
+            // Apply position
+            btn.style.position = 'fixed';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+            btn.style.zIndex = '999';
+            btn.style.transition = 'all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            btn.style.maxWidth = Math.floor(vw * 0.85) + 'px';
+            btn.style.whiteSpace = 'nowrap';
+            btn.style.overflow = 'hidden';
+            btn.style.textOverflow = 'ellipsis';
+
+            // Update text
+            const idx = Math.min(state.noClickCount, state.noSequence.length - 1);
+            btn.textContent = state.noSequence[idx];
+            state.noClickCount++;
+
+            // After text change, re-check bounds (text might change width)
+            // We use requestAnimationFrame to let the DOM update
+            requestAnimationFrame(() => {
+                const newRect = btn.getBoundingClientRect();
+                const newW = newRect.width;
+                const newH = newRect.height;
+                const currentLeft = parseFloat(btn.style.left);
+                const currentTop = parseFloat(btn.style.top);
+
+                // If button is now out of bounds, adjust
+                const newMaxX = Math.max(padding, vw - newW - padding);
+                const newMaxY = Math.max(padding, vh - newH - padding);
+
+                let adjusted = false;
+                let newX = currentLeft;
+                let newY = currentTop;
+
+                if (newX + newW > vw - padding) {
+                    newX = Math.min(newMaxX, vw - newW - padding);
+                    adjusted = true;
+                }
+                if (newX < padding) {
+                    newX = padding;
+                    adjusted = true;
+                }
+                if (newY + newH > vh - padding) {
+                    newY = Math.min(newMaxY, vh - newH - padding);
+                    adjusted = true;
+                }
+                if (newY < padding) {
+                    newY = padding;
+                    adjusted = true;
+                }
+
+                if (adjusted) {
+                    btn.style.left = newX + 'px';
+                    btn.style.top = newY + 'px';
+                }
+
+                state.isNoMoving = false;
+            });
+
+            // If we've gone through all messages, show popup after a delay
+            if (state.noClickCount >= state.noSequence.length) {
+                setTimeout(() => {
+                    // Reset button position
+                    btn.style.position = '';
+                    btn.style.left = '';
+                    btn.style.top = '';
+                    btn.style.zIndex = '';
+                    btn.style.maxWidth = '';
+                    btn.textContent = state.noOriginalText;
+                    state.isNoMoving = false;
+                    state.noClickCount = 0;
+                    showNoPopup();
+                }, 500);
+            } else {
+                // Reset moving flag after a short delay (in case RAF doesn't fire)
+                setTimeout(() => {
+                    state.isNoMoving = false;
+                }, 400);
+            }
+        }
+
+        function showNoPopup() {
+            const popup = $('no-popup');
+            popup.classList.add('active');
+            const wheelArea = $('wheel-area');
+            wheelArea.classList.add('hidden');
+            const wheel = $('wheel-spinner');
+            wheel.classList.remove('spinning');
+            wheel.style.transform = 'rotate(0deg)';
+        }
+
+        function closeNoPopup() {
+            $('no-popup').classList.remove('active');
+        }
+
+        // ============================================================
+        //  WHEEL SPINNER
+        // ============================================================
+        function spinWheel() {
+            const wheelArea = $('wheel-area');
+            wheelArea.classList.remove('hidden');
+            const wheel = $('wheel-spinner');
+            wheel.classList.remove('spinning');
+            void wheel.offsetWidth;
+            const deg = (4 + Math.random() * 3) * 360;
+            wheel.style.transition = 'transform 3.5s cubic-bezier(0.17, 0.67, 0.12, 0.99)';
+            wheel.style.transform = `rotate(${deg}deg)`;
+
+            setTimeout(() => {
+                closeNoPopup();
+                setTimeout(startYesFlow, 400);
+            }, 3800);
+        }
+
+        // ============================================================
+        //  YES FLOW
+        // ============================================================
+        function startYesFlow() {
+            state.noClickCount = 0;
+            state.isNoMoving = false;
+            const btn = $('btn-no');
+            btn.style.position = '';
+            btn.style.left = '';
+            btn.style.top = '';
+            btn.style.zIndex = '';
+            btn.style.maxWidth = '';
+            btn.textContent = state.noOriginalText;
+
+            const now = new Date();
+            calViewDate = new Date(now.getFullYear(), now.getMonth(), 1);
+            state.calendarSelectedDate = null;
+            state.selectedDate = null;
+            renderCalendar();
+            $('cal-day-display').innerHTML = '✨ Select a date above';
+            $('btn-continue-time').disabled = true;
+
+            qsa('.time-card').forEach(el => el.classList.remove('selected'));
+            state.selectedTime = null;
+            $('btn-continue-food').disabled = true;
+
+            state.selectedFoods = [];
+            $('food-container').innerHTML = '';
+            $('food-count').textContent = '0';
+            $('btn-lets-go').classList.remove('show');
+            $('btn-lets-go').classList.remove('btn-heartbeat');
+            $('btn-lets-go').disabled = true;
+
+            state.hasCelebrated = false;
+            state.confettiFired = false;
+
+            showScreen('s2');
+        }
+
+        // ============================================================
+        //  CELEBRATION & FINAL PAGE
+        // ============================================================
+        function goToFinalPage() {
+            updateFinalPage();
+            showScreen('s5');
+
+            if (!state.confettiFired) {
+                state.confettiFired = true;
+                setTimeout(fireConfetti, 300);
+            }
+
+            const banner = $('celebration-banner');
+            banner.style.animation = 'none';
+            requestAnimationFrame(() => {
+                banner.style.animation = 'popIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards';
+            });
+
+            updateCalendarLink();
+        }
+
+        function updateFinalPage() {
+            const dateStr = state.selectedDate;
+            const timeKey = state.selectedTime;
+            const foods = state.selectedFoods;
+
+            $('final-date').textContent = formatDateDisplay(dateStr);
+            $('final-day').textContent = getDayName(dateStr);
+            $('final-time').textContent = `${formatTimeEmoji(timeKey)} ${formatTimeLabel(timeKey)}`;
+            $('final-foods').textContent = foods.length ? foods.join(' · ') : '—';
+
+            const quote = getQuote(timeKey);
+            $('quote-text').textContent = quote;
+        }
+
+        // ============================================================
+        //  GOOGLE CALENDAR LINK
+        // ============================================================
+        function updateCalendarLink() {
+            const dateStr = state.selectedDate;
+            const timeKey = state.selectedTime;
+            if (!dateStr || !timeKey) return;
+
+            const timeMap = { morning: 8, afternoon: 14, night: 21 };
+            const hour = timeMap[timeKey];
+            const date = new Date(dateStr + 'T' + String(hour).padStart(2, '0') + ':00:00');
+
+            const utcYear = date.getUTCFullYear();
+            const utcMonth = String(date.getUTCMonth() + 1).padStart(2, '0');
+            const utcDay = String(date.getUTCDate()).padStart(2, '0');
+            const utcHour = String(date.getUTCHours()).padStart(2, '0');
+            const utcMinute = String(date.getUTCMinutes()).padStart(2, '0');
+
+            const startUTC = `${utcYear}${utcMonth}${utcDay}T${utcHour}${utcMinute}00Z`;
+
+            const endDate = new Date(date.getTime() + 2 * 60 * 60 * 1000);
+            const eYear = endDate.getUTCFullYear();
+            const eMonth = String(endDate.getUTCMonth() + 1).padStart(2, '0');
+            const eDay = String(endDate.getUTCDate()).padStart(2, '0');
+            const eHour = String(endDate.getUTCHours()).padStart(2, '0');
+            const eMinute = String(endDate.getUTCMinutes()).padStart(2, '0');
+            const endUTC = `${eYear}${eMonth}${eDay}T${eHour}${eMinute}00Z`;
+
+            const timeLabel = formatTimeLabel(timeKey);
+            const timeEmoji = formatTimeEmoji(timeKey);
+            const foods = state.selectedFoods;
+            const foodEmojis = foods.map(f => getFoodEmoji(f)).join(', ');
+            const foodNames = foods.join(', ');
+            const quote = getQuote(timeKey);
+
+            const description =
+                `It's a date! ✨%0A%0ATime: ${timeEmoji} ${timeLabel}%0A%0AWhat we're having:%0A${foodEmojis} ${foodNames}%0A%0A“${quote}”`;
+
+            const title = encodeURIComponent('💕 Our Date!');
+            const details = encodeURIComponent(description);
+            const location = encodeURIComponent('✨ Somewhere wonderful ✨');
+
+            const url =
+                `https://calendar.google.com/calendar/u/0/r/eventedit?text=${title}&dates=${startUTC}/${endUTC}&details=${details}&location=${location}`;
+
+            const link = $('btn-add-calendar');
+            link.href = url;
+            link.target = '_blank';
+            link.rel = 'noopener';
+        }
+
+        // ============================================================
+        //  CONFETTI
+        // ============================================================
+        let confettiCtx = null;
+        let confettiPieces = [];
+        let confettiRunning = false;
+        let confettiRAF = null;
+
+        function fireConfetti() {
+            const canvas = $('confetti-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            confettiCtx = ctx;
+
+            const colors = ['#f7c5cc', '#d4c5f9', '#e87a9e', '#f0b6c8', '#ff6b8a', '#ffd700', '#ff85a1', '#b8a0d0', '#ff9eb5',
+                '#c9b1ff'
+            ];
+            confettiPieces = [];
+            for (let i = 0; i < 180; i++) {
+                confettiPieces.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height - canvas.height,
+                    w: 6 + Math.random() * 8,
+                    h: 4 + Math.random() * 6,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    vx: (Math.random() - 0.5) * 2.5,
+                    vy: 2 + Math.random() * 4,
+                    rotation: Math.random() * 360,
+                    rotSpeed: (Math.random() - 0.5) * 10,
+                    opacity: 0.7 + Math.random() * 0.3,
+                    type: Math.random() > 0.6 ? 'heart' : 'rect'
+                });
+            }
+
+            if (confettiRunning) {
+                cancelAnimationFrame(confettiRAF);
+            }
+            confettiRunning = true;
+            animateConfetti();
+        }
+
+        function animateConfetti() {
+            const canvas = $('confetti-canvas');
+            const ctx = confettiCtx;
+            if (!ctx) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            let alive = false;
+            confettiPieces.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.rotation += p.rotSpeed;
+                p.vy += 0.04;
+
+                if (p.y < canvas.height + 30) alive = true;
+
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate((p.rotation * Math.PI) / 180);
+                ctx.globalAlpha = p.opacity;
+
+                if (p.type === 'heart') {
+                    ctx.font = `${p.w * 1.8}px sans-serif`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillStyle = p.color;
+                    ctx.fillText('❤️', 0, 0);
+                } else {
+                    ctx.fillStyle = p.color;
+                    ctx.shadowColor = p.color;
+                    ctx.shadowBlur = 6;
+                    ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+                }
+                ctx.restore();
+            });
+
+            confettiPieces = confettiPieces.filter(p => p.y < canvas.height + 30);
+
+            if (confettiPieces.length > 0 && confettiRunning) {
+                confettiRAF = requestAnimationFrame(animateConfetti);
+            } else {
+                confettiRunning = false;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        }
+
+        // ============================================================
+        //  BACKGROUND PARTICLES - FIXED: immediate start
+        // ============================================================
+        function initParticles() {
+            const container = $('particles-container');
+            const count = 50;
+            for (let i = 0; i < count; i++) {
+                const el = document.createElement('div');
+                const type = ['heart', 'star', 'glow'][Math.floor(Math.random() * 3)];
+                el.className = `particle ${type}`;
+                el.style.left = Math.random() * 100 + '%';
+                // Start from random vertical position
+                el.style.top = (Math.random() * 100) + '%';
+                // Use shorter delays so everything starts quickly
+                const delay = (Math.random() * 2.5);
+                el.style.animationDelay = delay + 's';
+                // Random duration for variety
+                const duration = 10 + Math.random() * 18;
+                el.style.animationDuration = duration + 's';
+                el.style.fontSize = (12 + Math.random() * 20) + 'px';
+                if (type === 'heart') el.textContent = ['❤️', '💖', '💕', '🌸', '🌺'][Math.floor(Math.random() * 5)];
+                if (type === 'star') el.textContent = ['✦', '✧', '⭐', '✨', '🌟'][Math.floor(Math.random() * 5)];
+                container.appendChild(el);
+            }
+            // Also add a few particles that start at the bottom to ensure continuous flow
+            for (let i = 0; i < 10; i++) {
+                const el = document.createElement('div');
+                const type = ['heart', 'star', 'glow'][Math.floor(Math.random() * 3)];
+                el.className = `particle ${type}`;
+                el.style.left = Math.random() * 100 + '%';
+                el.style.top = (90 + Math.random() * 10) + '%';
+                el.style.animationDelay = (0.1 + Math.random() * 0.5) + 's';
+                el.style.animationDuration = (12 + Math.random() * 16) + 's';
+                el.style.fontSize = (14 + Math.random() * 18) + 'px';
+                if (type === 'heart') el.textContent = ['❤️', '💖', '💕', '🌸', '🌺'][Math.floor(Math.random() * 5)];
+                if (type === 'star') el.textContent = ['✦', '✧', '⭐', '✨', '🌟'][Math.floor(Math.random() * 5)];
+                container.appendChild(el);
+            }
+        }
+
+        // ============================================================
+        //  EVENT BINDING
+        // ============================================================
+        function init() {
+            // ---- Screen 1 ----
+            $('btn-yes').addEventListener('click', startYesFlow);
+
+            $('btn-no').addEventListener('click', handleNoClick);
+            $('btn-no').addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                handleNoClick();
+            });
+
+            // ---- No popup ----
+            $('no-fine-yes').addEventListener('click', () => {
+                closeNoPopup();
+                setTimeout(startYesFlow, 300);
+            });
+
+            $('no-maybe').addEventListener('click', () => {
+                const btn = $('no-maybe');
+                btn.disabled = true;
+                spinWheel();
+                setTimeout(() => { btn.disabled = false; }, 4000);
+            });
+
+            // ---- Calendar navigation ----
+            $('cal-prev').addEventListener('click', () => {
+                calViewDate.setMonth(calViewDate.getMonth() - 1);
+                renderCalendar();
+                state.calendarSelectedDate = null;
+                state.selectedDate = null;
+                $('cal-day-display').innerHTML = '✨ Select a date above';
+                $('btn-continue-time').disabled = true;
+                qsa('.day-cell.selected').forEach(c => c.classList.remove('selected'));
+            });
+
+            $('cal-next').addEventListener('click', () => {
+                calViewDate.setMonth(calViewDate.getMonth() + 1);
+                renderCalendar();
+                state.calendarSelectedDate = null;
+                state.selectedDate = null;
+                $('cal-day-display').innerHTML = '✨ Select a date above';
+                $('btn-continue-time').disabled = true;
+                qsa('.day-cell.selected').forEach(c => c.classList.remove('selected'));
+            });
+
+            // ---- Screen 2: Continue ----
+            $('btn-continue-time').addEventListener('click', () => {
+                if (state.selectedDate) {
+                    showScreen('s3');
+                }
+            });
+
+            // ---- Screen 3: Time selection ----
+            qsa('.time-card').forEach(el => {
+                el.addEventListener('click', () => {
+                    qsa('.time-card').forEach(c => c.classList.remove('selected'));
+                    el.classList.add('selected');
+                    state.selectedTime = el.dataset.time;
+                    $('btn-continue-food').disabled = false;
+                });
+            });
+
+            $('btn-continue-food').addEventListener('click', () => {
+                if (state.selectedTime) {
+                    renderFoods(state.selectedTime);
+                    showScreen('s4');
+                }
+            });
+
+            // ---- Screen 4: Let's Go ----
+            $('btn-lets-go').addEventListener('click', () => {
+                if (state.selectedFoods.length === 3) {
+                    goToFinalPage();
+                }
+            });
+
+            // ---- Final page ----
+            $('btn-restart').addEventListener('click', () => {
+                state.selectedDate = null;
+                state.selectedTime = null;
+                state.selectedFoods = [];
+                state.noClickCount = 0;
+                state.isNoMoving = false;
+                state.hasCelebrated = false;
+                state.confettiFired = false;
+                state.calendarSelectedDate = null;
+
+                const btn = $('btn-no');
+                btn.style.position = '';
+                btn.style.left = '';
+                btn.style.top = '';
+                btn.style.zIndex = '';
+                btn.style.maxWidth = '';
+                btn.textContent = state.noOriginalText;
+
+                qsa('.time-card').forEach(el => el.classList.remove('selected'));
+                $('btn-continue-time').disabled = true;
+                $('btn-continue-food').disabled = true;
+                $('btn-lets-go').classList.remove('show');
+                $('btn-lets-go').classList.remove('btn-heartbeat');
+                $('btn-lets-go').disabled = true;
+                $('cal-day-display').innerHTML = '✨ Select a date above';
+                $('food-container').innerHTML = '';
+                $('food-count').textContent = '0';
+
+                const now = new Date();
+                calViewDate = new Date(now.getFullYear(), now.getMonth(), 1);
+                renderCalendar();
+                qsa('.day-cell.selected').forEach(c => c.classList.remove('selected'));
+
+                confettiRunning = false;
+                if (confettiRAF) cancelAnimationFrame(confettiRAF);
+                const canvas = $('confetti-canvas');
+                const ctx = canvas.getContext('2d');
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                showScreen('s1');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // ---- Keyboard ----
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    const active = document.activeElement;
+                    if (active && active.tagName === 'BUTTON') {
+                        active.click();
+                    }
+                }
+            });
+
+            // ---- Resize ----
+            window.addEventListener('resize', () => {
+                const canvas = $('confetti-canvas');
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+
+            // ---- Init ----
+            initParticles();
+            renderCalendar();
+            showScreen('s1');
+        }
+
+        // ============================================================
+        //  START - immediately
+        // ============================================================
+        // Run as soon as possible
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+
+</body>
+</html>
